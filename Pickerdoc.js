@@ -7,8 +7,10 @@ import {
   Linking,
   TouchableOpacity,
   FlatList,
+  StyleSheet,
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
+import * as MediaLibrary from "expo-media-library";
 
 export default function Pickerdoc({ fileArray }) {
   const [files, setFile] = useState([]);
@@ -25,8 +27,9 @@ export default function Pickerdoc({ fileArray }) {
     }
   };
 
-  const openDocument = (uri) => {
-    Linking.openURL(uri);
+  const openDocument = async (uri) => {
+    const asset = await MediaLibrary.createAssetAsync(uri);
+    await MediaLibrary.openBrowserAsync(asset);
   };
 
   const renderFileItem = ({ item }) => (
@@ -40,8 +43,7 @@ export default function Pickerdoc({ fileArray }) {
   );
 
   return (
-    <View>
-      <Button onPress={() => selectDoc()} title="Add doc" />
+    <View style={styles.container}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <FlatList
           data={files}
@@ -50,6 +52,12 @@ export default function Pickerdoc({ fileArray }) {
           horizontal
         />
       </View>
+      <Button style={styles.btn} onPress={() => selectDoc()} title="Add doc" />
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+  },
+});

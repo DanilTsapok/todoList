@@ -9,7 +9,6 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Animated,
-  ImageBackground,
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Colors from "./Colors";
@@ -66,7 +65,7 @@ export default class TodoModal extends React.Component {
                 style={{ width: 32 }}
               />
             </TouchableOpacity>
-
+            <View style={styles.blockTitleImg}></View>
             <View>
               <Text
                 style={[
@@ -82,20 +81,9 @@ export default class TodoModal extends React.Component {
                 {todo.title}
               </Text>
             </View>
-            {/* <View style={styles.Imgbody}>
-                {img.map((image, imageIndex) => (
-                  <View key={imageIndex} style={{ width: 100, height: 50 }}>
-                    <ImageBackground
-                      source={{ uri: image }}
-                      style={styles.card}
-                    ></ImageBackground>
-                    {console.log("Image array length:", img.length)}
-                  </View>
-                ))}
-              </View> */}
-            {/* <View>
+            <View>
               <Pickerdoc fileArray={this.state.file} />
-            </View> */}
+            </View>
           </View>
         </Swipeable>
       </GestureHandlerRootView>
@@ -235,17 +223,12 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     flexDirection: "row",
     display: "flex",
-    justifyContent: "space-between",
+
     alignItems: "center",
     paddingLeft: 32,
     marginHorizontal: 10,
   },
-  addImg: {
-    width: 100,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   todo: {
     color: Colors.black,
     fontSize: 16,
@@ -253,7 +236,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     flex: 1,
-
+    backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
     width: 80,
