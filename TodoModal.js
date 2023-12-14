@@ -21,24 +21,29 @@ import Pickerdoc from "./Pickerdoc";
 export default class TodoModal extends React.Component {
   state = {
     newTodo: "",
-    file: [],
+    file: null,
   };
-  // setFile = (file) => {
-  //   this.setState({ files: file });
-  // };
+
+  updateFileState = (newFiles) => {
+    this.setState({ file: newFiles });
+  };
+
   todoCompleted = (index) => {
     let list = this.props.list;
     list.todos[index].completed = !list.todos[index].completed;
-
     this.props.updateList(list);
   };
 
+  addFiles = (index, file) => {
+    let list = this.props.list;
+    list.todos[index].file.push(file);
+    this.props.updateList(list);
+  };
   addTodo = () => {
     let list = this.props.list;
     list.todos.push({
       title: this.state.newTodo,
       completed: false,
-      files: this.state.files,
     });
     this.props.updateList(list);
     this.setState({ newTodo: "" });
@@ -50,7 +55,15 @@ export default class TodoModal extends React.Component {
     this.props.updateList(list);
   };
 
+  renderFile = (item) => {
+    return (
+      <View>
+        <Text color={"black"}>{item}</Text>
+      </View>
+    );
+  };
   renderTodo = (todo, index) => {
+    // console.log("state", this.state);
     return (
       <GestureHandlerRootView>
         <Swipeable
@@ -65,24 +78,31 @@ export default class TodoModal extends React.Component {
                 style={{ width: 32 }}
               />
             </TouchableOpacity>
-            <View style={styles.blockTitleImg}></View>
-            <View>
-              <Text
-                style={[
-                  styles.todo,
-                  {
-                    textDecorationLine: todo.completed
-                      ? "line-through"
-                      : "none",
-                    color: todo.completed ? "green" : "red",
-                  },
-                ]}
-              >
-                {todo.title}
-              </Text>
-            </View>
-            <View>
-              <Pickerdoc fileArray={this.state.file} />
+            <View style={styles.blockTitleImg}>
+              <View>
+                <Text
+                  style={[
+                    styles.todo,
+                    {
+                      textDecorationLine: todo.completed
+                        ? "line-through"
+                        : "none",
+                      color: todo.completed ? "green" : "red",
+                    },
+                  ]}
+                >
+                  {todo.title}
+                </Text>
+              </View>
+              <View>
+                <Pickerdoc
+                  fileArray={this.state.file}
+                  updateFileState={this.updateFileState}
+                  addFiles={this.addFiles}
+                  index={index}
+                  list={this.props.list}
+                />
+              </View>
             </View>
           </View>
         </Swipeable>

@@ -5,19 +5,22 @@ export default tempData = [
     color: "#f5d505",
     todos: [
       {
+        id: 1,
         title: "324",
         completed: false,
-        files: null,
+        file: [],
       },
       {
+        id: 2,
         title: "234",
         completed: false,
-        files: null,
+        file: [],
       },
       {
+        id: 3,
         title: "123",
         completed: true,
-        files: null,
+        file: [],
       },
     ],
   },
@@ -27,31 +30,16 @@ export default tempData = [
     color: "#f5d505",
     todos: [
       {
+        id: 1,
         title: "345345",
         completed: false,
-        files: null,
+        file: [],
       },
       {
+        id: 2,
         title: "123123",
         completed: true,
-        files: null,
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "4",
-    color: "#f5d505",
-    todos: [
-      {
-        title: "345345",
-        completed: false,
-        files: null,
-      },
-      {
-        title: "123123",
-        completed: true,
-        files: null,
+        file: [],
       },
     ],
   },

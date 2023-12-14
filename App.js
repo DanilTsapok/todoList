@@ -18,7 +18,7 @@ import AddTodoModal from "./addTodoModal";
 export default class App extends React.Component {
   state = {
     addTodoVisible: false,
-    lists: tempData,
+    list: tempData,
   };
 
   setVisible() {
@@ -31,16 +31,16 @@ export default class App extends React.Component {
 
   addList = (list) => {
     this.setState({
-      lists: [
-        ...this.state.lists,
-        { ...list, id: this.state.lists.length + 1, todos: [] },
+      list: [
+        ...this.state.list,
+        { ...list, id: this.state.list.length + 1, todos: [] },
       ],
     });
   };
 
   updateList = (list) => {
     this.setState({
-      list: this.state.lists.map((item) => {
+      list: this.state.list.map((item) => {
         return item.id === list.id ? list : item;
       }),
     });
@@ -79,7 +79,7 @@ export default class App extends React.Component {
         </View>
         <View style={{ height: 275, paddingLeft: 32, paddingRight: 32 }}>
           <FlatList
-            data={this.state.lists}
+            data={this.state.list}
             keyExtractor={(item) => item.name}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
